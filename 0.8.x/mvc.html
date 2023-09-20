@@ -99,7 +99,7 @@
                     <div>
                       <ul class="nav flex-column">
                           <li class="nav-item">
-                              <a class="nav-link" href="mvc.html#section-1">Build</a>
+                              <a class="nav-link" href="mvc.html#section-1">build.gradle</a>
                           </li>
                         <li class="nav-item">
                           <a class="nav-link" href="mvc.html#section-2">Controllers</a>
@@ -231,17 +231,57 @@
 <hr size="5">
 
               <!-- colors -->
-              <section id="section-2">
-                  <h2 class="section-title-2">The Build<a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
-                  <p>Currently we are doing everything with GRADLE (if someone wants to contribute instructions for MAVEN, let us know). </p>
+              <section id="section-1">
+                  <h2 class="section-title-1">build.gradle<a data-scroll href="#section-1" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
+                  <p>When setting up a new project, your <b>build.gradle</b> file needs to include the following at a 'bare minimum'. </p>
+                  <p>You can use the following as a template or just copy from the <a href="https://github.com/Beapi-io/beapi-java-demo/blob/main/build.gradle">beapi-java-demo</a>:</p>
                   <div class="row">
                       <div class="col">
                           <div class="card">
                               <div class="card-body" style="background-color:#000;">
-                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">dependencies {
+                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven {
+		url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+		//url 'https://s01.oss.sonatype.org/content/repositories/releases'
+	}
+}
+
+...
+
+dependencies {
     ...
     implementation 'io.beapi:spring-boot-starter-beapi:0.7.0-SNAPSHOT'
+	implementation "org.springframework.boot:spring-boot-autoconfigure:2.6.2"
+	implementation "org.springframework.data:spring-data-jpa:2.6.2"
+	implementation "org.springframework.boot:spring-boot:2.6.2"
+	implementation("jakarta.persistence:jakarta.persistence-api:2.2.3")
+	implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.56")
+	implementation("org.slf4j:slf4j-api:1.7.32")
+	implementation("org.springframework:spring-beans:5.3.14")
+	implementation("org.springframework:spring-context:5.3.14")
+	implementation("org.springframework:spring-web:5.3.14")
     ...
+}
+
+springBoot {
+	buildInfo()
+}
+
+test {
+	useJUnitPlatform()
+}
+
+configurations {
+	commonWebResources
+}
+
+jar {
+	manifest {
+		attributes 'Main-Class': javaMainClass
+	}
 }</code></pre>
                               </div>
                           </div>
@@ -472,6 +512,9 @@ public class YourController extends BeapiRequestHandler {
           <aside class="col-md-3 col-xxl-3 d-none d-md-block">
             <div class="sticky">
               <ul id="toc" class="nav flex-column toc">
+                  <li class="nav-item">
+                      <a data-scroll class="nav-link" href="#section-1">build.gradle</a>
+                  </li>
                 <li class="nav-item">
                   <a data-scroll class="nav-link" href="#section-2">Controllers</a>
                 </li>
