@@ -39,19 +39,22 @@
                               <a class="nav-link" href="index.html#section-1">Requirements</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="index.html#section-2">Configure Demo Project</a>
+                              <a class="nav-link" href="index.html#section-2">Quick Start</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="index.html#section-3">Setup Demo Project DB</a>
+                              <a class="nav-link" href="index.html#section-3">Configure Project</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="index.html#section-4">Build Demo Project</a>
+                              <a class="nav-link" href="index.html#section-4">Setup Project DB</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="index.html#section-5">Run Demo Project</a>
+                              <a class="nav-link" href="index.html#section-5">Build Project</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="index.html#section-6">Troubleshooting</a>
+                              <a class="nav-link" href="index.html#section-6">Run Project</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="index.html#section-7">Troubleshooting</a>
                           </li>
                       </ul>
                     </div>
@@ -101,14 +104,17 @@
                           <li class="nav-item">
                               <a class="nav-link" href="mvc.html#section-1">build.gradle</a>
                           </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="mvc.html#section-2">Application Class</a>
+                          </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="mvc.html#section-2">Controllers</a>
+                          <a class="nav-link" href="mvc.html#section-3">Controller Class</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="mvc.html#section-3">IO State</a>
+                          <a class="nav-link" href="mvc.html#section-4">IO State</a>
                         </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="mvc.html#section-4">OAuth/JWT</a>
+                              <a class="nav-link" href="mvc.html#section-5">OAuth/JWT</a>
                           </li>
                       </ul>
                     </div>
@@ -183,9 +189,6 @@
                       <ul class="nav flex-column">
                         <li class="nav-item">
                           <a class="nav-link" href="adv_config.html#section-1">Versioning</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="adv_config.html#section-2">IO State</a>
                         </li>
                       </ul>
                     </div>
@@ -266,6 +269,8 @@ dependencies {
     ...
 }
 
+ext.javaMainClass = "demo.application.Application"
+
 springBoot {
 	buildInfo()
 }
@@ -287,6 +292,14 @@ jar {
                           </div>
                       </div>
                   </div>
+
+                  <div class="row">
+                      <div class="col">
+                          <div class="alert alert-primary" role="alert">
+                              <p><b>NOTE</b>: You will want to replace <b>ext.javaMainClass</b> with the path and name of your 'Application' class</p>
+                          </div>
+                      </div>
+                  </div>
               </section>
               <!-- / colors -->
 
@@ -294,9 +307,80 @@ jar {
               <hr size="5">
 
 
+              <section id="section-2">
+                  <h2 class="section-title-2">Application Class<a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
+                  <p>The <b>Application</b> class needs to be directly copied and moved into <b>src/main/java</b> or <b>src/main/groovy</b> of the project (depending on the language you are working in). See <a href="https://github.com/Beapi-io/beapi-java-demo/blob/main/src/main/java/demo/application/Application.java">beapi-java-demo</a> for example</p>
+                  <div class="row">
+                      <div class="col">
+                          <div class="card">
+                              <div class="card-body" style="background-color:#000;">
+                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.config.BootstrapMode;
+import org.springframework.boot.ApplicationArguments;
+import demo.application.init.BootStrap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.slf4j.LoggerFactory;
+import java.util.*;
+import io.beapi.api.service.CliService;
+import org.springframework.beans.factory.annotation.Value;
+
+@ComponentScan({"${beapi.components}","${application.components}"})
+@EnableJpaRepositories(basePackages = {"${beapi.repository}","${application.repository}"})
+@SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class})
+class Application implements ApplicationRunner  {
+
+    @Value("${spring.profiles.active}")
+    String profile;
+
+    @Autowired
+    BootStrap bootStrap;
+
+    @Autowired
+    private CliService cliService;
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Application.class);
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+    public void run(ApplicationArguments args) throws Exception {
+        System.out.println("Running in : "+profile);
+        bootStrap.init(applicationContext);
+        cliService.parse();
+    }
+}</code></pre>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <p>Notice that the <b>@Controller</b> annotation has a value that matches the <b>NAME</b> in the corresponding I/O state file (which in turn matches how it is called). This is how we map the controller to the I/O state and mapping.</p>
+                  <p>It should also be mentioned that the methods (like most controller methods) are using <b>HttpServletRequest and HttpServletResponse</b> so you will have to import those as well.</p>
+
+                  <p>When returning data from your methods, you can return data as an:</p>
+                  <ul>
+                      <li>JPA <a href="https://javaee.github.io/javaee-spec/javadocs/javax/persistence/Entity.html">ENTITY</a></li>
+                      <li><b>List / ArrayList / HashSet / Set</b> : these will then need to be list of maps to be compliant with IO State</li>
+                      <li><b>Map / HashMap / LinkedHashMap</b></li>
+                  </ul>
+                  <p>If you need examples, see the <a href="https://github.com/orubel/spring-boot-starter-beapi/tree/main/demo-application/src/main/java/demo/application/controller">demo-application/src/main/java/demo/application/controller</a> directory</p>
+              </section>
+
+
+              <hr size="5">
+
             <!-- colors -->
-            <section id="section-2">
-              <h2 class="section-title-2">The Controllers<a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
+            <section id="section-3">
+              <h2 class="section-title-3">The Controllers<a data-scroll href="#section-3" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
               <p>When building a controller class, you require only two things : a <b>@Controller</b> annotation and to 'extend'' the <b>BeapiRequestHandler</b> class : </p>
               <div class="row">
                 <div class="col">
@@ -333,8 +417,8 @@ public class YourController extends BeapiRequestHandler {
 <hr size="5">
 
             <!-- colors -->
-            <section id="section-3">
-              <h2 class="section-title-2">IO State <a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
+            <section id="section-4">
+              <h2 class="section-title-4">IO State <a data-scroll href="#section-4" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
               <p>An IO State File is RULES / DESCRIPTIONS for your API endpoints ASSOCIATED a CONTROLLER; It is a cacheable configuration file that can then be synchronized with all application servers.</p>
               <p>This enables all URI's (and their associated data) to be easily cached and this data to be shared with services in the architecture (ie Proxy, MQ, etc).</p>
               <p>Examples of IO state files can be found in <a href="https://github.com/orubel/spring-boot-starter-beapi-config/tree/main/.iostate">spring-boot-starter-beapi-config</a>.</p>
@@ -491,8 +575,8 @@ public class YourController extends BeapiRequestHandler {
 <hr size="5">
 
             <!-- file tree -->
-            <section id="section-4">
-              <h2 class="section-title-2">Troubleshooting<a data-scroll href="#section-4" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
+            <section id="section-5">
+              <h2 class="section-title-5">Troubleshooting<a data-scroll href="#section-5" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
               <p></p>
               <div class="row">
                 <div class="col">
