@@ -230,6 +230,7 @@
 
             <h1 class="h2 font-weight-light"><b>Application Development with BeAPI</b></h1>
               <p>The <b>Beapi Springboot Starter</b> has several built-in tools to help you get started that will automate most of the development/build for you. Below is an explaination of those tools and how to use them.</p>
+              <p>Prior to running the application, make sure you follow <a href="config.html">the configuration instructions</a>.</p>
 
 <hr size="5">
 
@@ -237,7 +238,7 @@
               <section id="section-1">
                   <h2 class="section-title-1">build.gradle<a data-scroll href="#section-1" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
                   <p>When setting up a new project, your <b>build.gradle</b> file needs to include the following at a 'bare minimum'. </p>
-                  <p>You can use the following as a template or just copy from the <a href="https://github.com/Beapi-io/beapi-java-demo/blob/main/build.gradle">beapi-java-demo</a>:</p>
+                  <p>You can use the following as a template or just <a href="https://raw.githubusercontent.com/Beapi-io/beapi-java-demo/main/build.gradle">copy the file from beapi-java-demo</a>:</p>
                   <div class="row">
                       <div class="col">
                           <div class="card">
@@ -295,7 +296,7 @@ jar {
 
                   <div class="row">
                       <div class="col">
-                          <div class="alert alert-primary" role="alert">
+                          <div class="alert alert-danger" role="alert">
                               <p><b>NOTE</b>: You will want to replace <b>ext.javaMainClass</b> with the path and name of your 'Application' class</p>
                           </div>
                       </div>
@@ -309,7 +310,8 @@ jar {
 
               <section id="section-2">
                   <h2 class="section-title-2">Application Class<a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
-                  <p>The <b>Application</b> class needs to be directly copied and moved into <b>src/main/java</b> or <b>src/main/groovy</b> of the project (depending on the language you are working in). See <a href="https://github.com/Beapi-io/beapi-java-demo/blob/main/src/main/java/demo/application/Application.java">beapi-java-demo</a> for example</p>
+                  <p>The <b>Application</b> class needs to be directly copied and moved into <b>src/main/java</b> or <b>src/main/groovy</b> of the project (depending on the language you are working in). See <a href="https://github.com/Beapi-io/beapi-java-demo/blob/main/src/main/java/demo/application/Application.java">beapi-java-demo</a> for an example</p>
+                  <p>ALSO... prior to running the application, make sure you follow <a href="config.html">the configuration instructions</a></p>
                   <div class="row">
                       <div class="col">
                           <div class="card">
@@ -363,16 +365,7 @@ class Application implements ApplicationRunner  {
                           </div>
                       </div>
                   </div>
-                  <p>Notice that the <b>@Controller</b> annotation has a value that matches the <b>NAME</b> in the corresponding I/O state file (which in turn matches how it is called). This is how we map the controller to the I/O state and mapping.</p>
-                  <p>It should also be mentioned that the methods (like most controller methods) are using <b>HttpServletRequest and HttpServletResponse</b> so you will have to import those as well.</p>
 
-                  <p>When returning data from your methods, you can return data as an:</p>
-                  <ul>
-                      <li>JPA <a href="https://javaee.github.io/javaee-spec/javadocs/javax/persistence/Entity.html">ENTITY</a></li>
-                      <li><b>List / ArrayList / HashSet / Set</b> : these will then need to be list of maps to be compliant with IO State</li>
-                      <li><b>Map / HashMap / LinkedHashMap</b></li>
-                  </ul>
-                  <p>If you need examples, see the <a href="https://github.com/orubel/spring-boot-starter-beapi/tree/main/demo-application/src/main/java/demo/application/controller">demo-application/src/main/java/demo/application/controller</a> directory</p>
               </section>
 
 
@@ -392,16 +385,52 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller("your")
-public class YourController extends BeapiRequestHandler {
+@Controller("user")
+public class UserController extends BeapiRequestHandler {
+
+	@Autowired
+	private UserService userService;
                       ...
 }</code></pre>
                     </div>
                   </div>
                 </div>
               </div>
-		<p>Notice that the <b>@Controller</b> annotation has a value that matches the <b>NAME</b> in the corresponding I/O state file (which in turn matches how it is called). This is how we map the controller to the I/O state and mapping.</p>
-              <p>It should also be mentioned that the methods (like most controller methods) are using <b>HttpServletRequest and HttpServletResponse</b> so you will have to import those as well.</p>
+		        <p>Notice that the <b>@Controller</b> annotation has a value that matches the <b>NAME</b> in the corresponding I/O state file (which in turn matches how it is called in the url). This is how we map the controller to the I/O state and mapping.</p>
+                <p>The second thing you will see is an <b>Autowired</b> service. In most controllers you will have some service that enables you to access your repository. This is just good practice.</p>
+                <h3 class="section-title-3">Controller Methods<a data-scroll href="#section-3" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h3>
+                <p>Every API controller method MUST get two args: <b>HttpServletRequest and HttpServletResponse</b>. Lets walk through a simple method example:</p>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body" style="background-color:#000;">
+                            <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">	public User show(HttpServletRequest request, HttpServletResponse response){
+		Long id = Long.parseLong(this.params.get("id"));
+		User usr = userService.findById(id);
+		if (Objects.nonNull(usr)) {
+			return usr;
+		}
+		return null;
+    }</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>First, you may notice that we are parsing something called <b>this.params</b>. There are also several variables available to the controller that are inherited through the <b>BeapiRequestHandler</b>:</p>
+                <div class="row">
+                    <div class="col">
+                        <div class="alert alert-warning" role="alert">
+                            <ul>
+                                <li><b>this.params </b> - [LinkedHashMap&lt;String,String&gt;] params sent for this endpoint associated with this ROLE</li>
+                                <li><b>this.keyList </b>- [Set] param keys sent for this endpoint associated with this ROLE </li>
+                                <li><b>this.controller </b>- [String] current controller being called</li>
+                                <li><b>this.action </b>- [String]current controller method being called</li>
+                                <li><b>this.apiversion </b>- [String] api version sent in request</li>
+                                <li><b>this.authority </b>- [String] ROLE of user sent in request</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div></br>
 
               <p>When returning data from your methods, you can return data as an:</p>
               <ul>
