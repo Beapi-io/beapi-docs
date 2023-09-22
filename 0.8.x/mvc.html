@@ -398,6 +398,7 @@ public class UserController extends BeapiRequestHandler {
               </div>
 		        <p>Notice that the <b>@Controller</b> annotation has a value that matches the <b>NAME</b> in the corresponding I/O state file (which in turn matches how it is called in the url). This is how we map the controller to the I/O state and mapping.</p>
                 <p>The second thing you will see is an <b>Autowired</b> service. In most controllers you will have some service that enables you to access your repository. This is just good practice.</p>
+                </br>
                 <h3 class="section-title-3">Controller Methods<a data-scroll href="#section-3" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h3>
                 <p>Every API controller method MUST get two args: <b>HttpServletRequest and HttpServletResponse</b>. Lets walk through a simple method example:</p>
                 <div class="row">
@@ -430,15 +431,75 @@ public class UserController extends BeapiRequestHandler {
                             </ul>
                         </div>
                     </div>
-                </div></br>
+                </div>
 
               <p>When returning data from your methods, you can return data as an:</p>
-              <ul>
-                <li>JPA <a href="https://javaee.github.io/javaee-spec/javadocs/javax/persistence/Entity.html">ENTITY</a></li>
-                <li><b>List / ArrayList / HashSet / Set</b> : these will then need to be list of maps to be compliant with IO State</li>
-                <li><b>Map / HashMap / LinkedHashMap</b></li>
-              </ul>
-              <p>If you need examples, see the <a href="https://github.com/orubel/spring-boot-starter-beapi/tree/main/demo-application/src/main/java/demo/application/controller">demo-application/src/main/java/demo/application/controller</a> directory</p>
+                <div class="row">
+                    <div class="col">
+                        <div class="alert alert-warning" role="alert">
+                            <ul>
+                                <li><b>JPA <a href="https://javaee.github.io/javaee-spec/javadocs/javax/persistence/Entity.html">ENTITY</a></b> - See above controller method for example</li>
+                                <li><b>List / ArrayList / HashSet / Set</b></li>
+                                <li><b>Map / HashMap / LinkedHashMap</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              <p>If you need examples, see the <a href="https://github.com/Beapi-io/beapi-java-demo/tree/main/src/main/java/demo/application/controller">demo-application/src/main/java/demo/application/controller</a> directory</p>
+            </br>
+                <h3 class="section-title-3">Controller Methods with Multiple ROLES<a data-scroll href="#section-3" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h3>
+                <p>In IO State files, we can enable endpoint to be called by multiple <b>ROLES</b> in the <b>NETWORKGRP</b>. Through this, we can then establish <b>different REQUEST DATA to send & different RESPONSE DATA to return for each ROLE</b>. This is what is commonly referred to as <b><a href="https://en.wikipedia.org/wiki/Role-based_access_control">RBAC/ABAC</a></b></p>
+                <p>Below we have an example from an IO State file showing how it would look if we had <b>BASIC NETWORKGRP PERMISSIONS</b> (permitAll) as well as <b>ROLE_ADMIN</b>permissions:</p>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body" style="background-color:#000;">
+                            <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">"REQUEST": {
+	"permitAll": [],
+	"ROLE_ADMIN": ["id"]
+},
+"RESPONSE": {
+	"permitAll": ["id", "version", "username", "email", "enabled", "accountExpired"],
+	"ROLE_ADMIN": ["firstName","lastName"]
+}
+    }</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>Now we can't just return the same data from our controller for both permissions as <b>this would throw an error</b>. We have to parse for each permission level:</p>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body" style="background-color:#000;">
+                            <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">@Autowired
+protected PrincipleService principle;
+
+...
+
+public User show(HttpServletRequest request, HttpServletResponse response){
+	if(principle.authorities().contains(this.authority)){
+		// authority
+		switch(this.authority){
+			case 'ROLE_ADMIN':
+				Long userId = this.params.get("id")
+				User user = userService.findById(username);
+				break;
+		}
+	}else{
+		// permitAll
+		String username = principle.name();
+		User user = userService.findByUsername(username);
+	}
+	if (Objects.nonNull(user)) {
+		return user;
+	}
+	return null;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
             <!-- / colors -->
 
