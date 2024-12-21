@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87598302-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87598302-1');
+</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="assets/css/vendor.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <title>BeAPI API Framework - Documentation / Installation</title>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+
+<section class="py-0">
+  <div class="container-fluid">
+    <div class="row justify-content-between">
+
+      <!-- navigation -->
+      <aside class="col-lg-3 col-xxl-2 p-3 doc-sidebar">
+        <div class="sticky">
+          <nav class="navbar navbar-vertical navbar-expand-lg navbar-light">
+            <div>
+              <a href="index.html" class="navbar-brand"><img src="assets/images/logo.png" alt="Logo"><span class="badge badge-green ml-2"></span></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul id="page-nav" class="nav flex-column nav-vertical-2">
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-2" role="button" aria-expanded="false" aria-controls="menu-2">Installation</a>
+                  <div class="collapse" id="menu-2" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="index.html#section-1">Requirements</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="index.html#section-2">Configure Demo Project</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="index.html#section-3">Setup Demo Project DB</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="index.html#section-4">Build Demo Project</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="index.html#section-5">Run Demo Project</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="index.html#section-6">Troubleshooting</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-3" role="button" aria-expanded="false" aria-controls="menu-3">Configuration</a>
+                  <div class="collapse" id="menu-3" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="config.html#section-a">Config Files</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="config.html#section-1">Application.properties</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="config.html#section-2">Gradle.properties</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="config.html#section-3">Beapi API Config Changes</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="config.html#section-4">Beapi DB Config Changes</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-5" role="button" aria-expanded="false" aria-controls="menu-5">Bootstrapping</a>
+                  <div class="collapse" id="menu-5" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="bootstrap.html#section-1">Generate API Controllers</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="bootstrap.html#section-2">Generate IO State</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-11" role="button" aria-expanded="false" aria-controls="menu-11">Public Endpoints</a>
+                  <div class="collapse" id="menu-11" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="endpoints.html#section-a">/authenticate</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="endpoints.html#section-1">/register & /validate</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="endpoints.html#section-4">/forgotPassword & /resetPassword</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="collapse" href="#menu-10" role="button" aria-expanded="true" aria-controls="menu-10">Authorization/Authentication</a>
+                  <div class="collapse show" id="menu-10" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="auth.html#section-1">Authorization/Authentication</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="auth.html#section-2">MailServer Setup</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-4" role="button" aria-expanded="false" aria-controls="menu-4">Development</a>
+                  <div class="collapse" id="menu-4" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="mvc.html#section-1">Build</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="mvc.html#section-2">Controllers</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="mvc.html#section-3">IO State</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="mvc.html#section-4">OAuth/JWT</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <!--
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#menu-6" role="button" aria-expanded="false" aria-controls="menu-6">Security</a>
+                <div class="collapse" id="menu-6" data-parent="#page-nav">
+                  <div>
+                    <ul class="nav flex-column">
+                      <li class="nav-item">
+                        <a class="nav-link" href="security.html#section-1">CORS / NetworkGroups</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="security.html#section-2">Roles / NetworkRoles</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="security.html#section-3">SSO / Providers</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+                -->
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-7" role="button" aria-expanded="false" aria-controls="menu-7">API Usage (Examples)</a>
+                  <div class="collapse" id="menu-7" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="usage.html#section-a">User Registration</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="usage.html#section-1">Authorization Calls</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="usage.html#section-2">API Calls</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="usage.html#section-3">User Management</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="usage.html#section-4">Provided Endpoints</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-8" role="button" aria-expanded="false" aria-controls="menu-8">Advanced Functionality</a>
+                  <div class="collapse" id="menu-8" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="advanced.html#section-1">Automated Batching</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="advanced.html#section-2">Automated Webhooks</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="advanced.html#section-3">API Chaining®</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="advanced.html#section-4">Architecture PING</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="advanced.html#section-5">Rate Limiting</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="advanced.html#section-6">Link Relations</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-9" role="button" aria-expanded="false" aria-controls="menu-9">Advanced Configuration</a>
+                  <div class="collapse" id="menu-9" data-parent="#page-nav">
+                    <div>
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="adv_config.html#section-1">Versioning</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </aside>
+      <!-- / navigation -->
+
+
+      <!-- content -->
+      <article class="col-lg-9 col-xxl-10 doc-content">
+
+        <div class="row">
+          <div class="col">
+            <div class="doc-content-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <nav aria-label="breadcrumb" class="align-items-center">
+                    <ol class="breadcrumb d-none d-lg-inline-flex">
+                      <li class="breadcrumb-item"><a href="index.html">Documentation</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Installation</li>
+                    </ol>
+                  </nav>
+                </div>
+                <div class="col text-right">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-between doc-content-body">
+          <article class="col-md-9 col-xxl-8">
+
+            <h1 class="h2 font-weight-light"><b>Authentication / Authorization</b></h1>
+            <p>The <b>Beapi Springboot Starter</b> has several built-in tools to help you get loggedIn/Logout and secure your users access.. Below is an explanation of those tools and how to use them.</p>
+
+            <hr size="5">
+
+            <!-- typogrpahy -->
+            <section id="section-1">
+              <h2 class="section-title-2">Authentication/Authorization<a data-scroll href="#section-1" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
+              <p>User management including authentication/authorization are BUILT-IN. You can login and get a token using the following methids...</p>
+
+              <ul>
+                <li><p><h5>Authentication</h5> Assuming you already have a 'registered acct', you can 'authenticate' using the following command:</p>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <div class="card-body" style="background-color:#000;">
+                          <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">curl -v -c ./cookies.txt -H "Content-Type: application/json" -X POST -d '{"username":"YOUR_USERNAME","password":"YOUR_PASSWORD"}' http://YOURSITE:8080/authenticate</code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p>An example of authenticating via Javascript/Jquery is below:</p>
+                  <div class="alert alert-warning" role="alert">
+                    <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">
+  $('#login').submit(function (event) {
+      event.preventDefault();
+     var jsonData = {"username":$('#username').val(),"password":$('#password').val() };
+
+      $.ajax({
+          type: 'POST',
+          url: window.url + "/authenticate",
+          cache:false,
+          async:true,
+          contentType: 'application/json',
+          data: JSON.stringify(jsonData),
+          //dataType:'json',
+          headers: {
+              'Access-Control-Allow-Origin': 'http://test.nosegrind.net:8080'
+          },
+          xhrFields:{
+              withCredentials: true
+          },
+          crossDomain: true,
+          error: function (xhr, textStatus, thrownError){
+              console.log('error: ' + thrownError);
+          },
+          success: function (data, textStatus, xhr){
+              console.log('success');
+          },
+          complete: function (xhr, textStatus) {
+              console.log('complete');
+          }
+      }).done(function(data, textStatus, jqXHR) {
+          console.log('done : '+textStatus);
+          if(textStatus=='success'){
+              var tmp = jqXHR.responseText
+              localStorage.setItem('token', tmp);
+
+              // reload header
+              var header = null;
+              var test = localStorage.getItem('token');
+              if(test!=null){
+                  header = "common/admin_header.html";
+              }else{
+                  header = "common/nologin_header.html";
+              }
+
+              $("#orp_header").load(header);
+              location.reload();
+          };
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+          alert(textStatus);
+          var msg = '';
+          if (jqXHR.status === 0) {
+              msg = 'Not connected.Verify Network.'+window.url+'.Error:'+errorThrown;
+          } else if (jqXHR.status == 404) {
+              msg = 'Requested page not found. [404]\n' + jqXHR.responseText;
+          } else if (jqXHR.status == 500) {
+              msg = 'Internal Server Error [500].\n' + jqXHR.responseText;
+          } else if (exception === 'parsererror') {
+              msg = 'Bad Credentials. Please Try Again';
+          } else if (exception === 'timeout') {
+              msg = 'Time out error.';
+          } else if (exception === 'abort') {
+              msg = 'Ajax request aborted.';
+          } else {
+              msg = 'Uncaught Error.\n' + jqXHR.responseText;
+          }
+          alert(msg);
+      })
+
+  });
+
+                    </code></pre>
+                  </div></br></br>
+
+
+                </li>
+                <li><p><h5>Authorization</h5> Once you get back a token, you can use it in followup requests like so:</p>
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <div class="card-body" style="background-color:#000;">
+                          <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">curl -v -b ./cookies.txt -H "Content-Type: application/json" -H "Authorization: Bearer YOUR_TOKEN" --request GET "http://YOURSITE:8080/v1.0/user/show?id%3Dtest"</code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              </ul>
+              <div class="alert alert-danger" role="alert">
+              <b>NOTE:</b> One must first have an account prior to auth. Admin/test accounts are autobootstrapped for testing in the beapi_api.yml file (which can be used to test).
+              </div>
+            </section>
+            <!-- / typography -->
+
+<hr size="5">
+
+            <!-- file tree -->
+            <section id="section-2">
+              <h2 class="section-title-2">Mail Server Setup<a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
+              <p>Two-factor auth is used for 'registration/'forgot password' functionality. For this, you need to create an acct at <a href="https://www.twilio.com/docs/verify/email#twilio-docs-content-area">'twilio'/'sendgrid'</a></p>
+              <div class="row">
+                <div class="col">
+                  <div class="alert alert-warning" role="alert">
+                    <ul>
+                      <li>[SendGrid] Create or log in to <a href="https://www.twilio.com/docs/verify/email#set-up-your-sendgrid-account">your SendGrid account</a></li>
+                      <li>[SendGrid] Create a <a href="https://www.twilio.com/docs/verify/email#create-a-sendgrid-api-key">SendGrid API Key</a></li>
+                      <li>[SendGrid] Set up <a href="https://www.twilio.com/docs/verify/email#set-up-domain-authentication">domain authentication</a></li>
+                      <li>[SendGrid] Create <a href="https://www.twilio.com/docs/verify/email#create-an-email-template">an email template</a></li>
+                      <li>[Verify] Create a <a href="https://console.twilio.com/us1/develop/verify/services">Verify service</a></li>
+                      <li>[BEAPI] Change mail server config (see below)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div></br>
+
+              <p>The following variables in the <b>beapi_api.yml</b> file, need to be changed to match your mail server setup...</p>
+              <div class="row">
+                <div class="col">
+                  <div class="card">
+                    <div class="card-body" style="background-color:#000;">
+                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">...
+    mail:
+        host: 'smtp.sendgrid.net'
+        port: 587
+        username: 'apikey'
+        password: "password"
+        fromAddress: 'donotrespond@yoursite.com'
+        senderName: 'beapi.io'
+        smtpAuth: true
+        smtpStarttlsEnable: true
+        testemail: 'youremail@gmail.com'
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+
+          </article>
+
+
+          <aside class="col-md-3 col-xxl-3 d-none d-md-block">
+            <div class="sticky">
+              <ul id="toc" class="nav flex-column toc">
+                <li class="nav-item">
+                  <a data-scroll class="nav-link" href="#section-1">Requirements</a>
+                </li>
+                <li class="nav-item">
+                  <a data-scroll class="nav-link" href="#section-2">Configure Demo Project</a>
+                </li>
+                <li class="nav-item">
+                  <a data-scroll class="nav-link" href="#section-3">Setup Demo Project DB</a>
+                </li>
+                <li class="nav-item">
+                  <a data-scroll class="nav-link" href="#section-4">Build Demo Project</a>
+                </li>
+                <li class="nav-item">
+                  <a data-scroll class="nav-link" href="#section-5">Run Demo Project</a>
+                </li>
+                <li class="nav-item">
+                  <a data-scroll class="nav-link" href="#section-6">Troubleshooting</a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
+
+        </div>
+
+      </article>
+      <!-- / content -->
+
+    </div>
+  </div>
+</section>
+
+
+<!-- footer -->
+<footer class="bg-dark">
+  <div class="container">
+    <div class="row gutter-3">
+      <div class="col-12 col-md-2">
+        <a href=""><img src="assets/images/logo_bw.png" alt="Logo"></a>
+      </div>
+      <div class="col-12 col-md-6 text-white">
+        <p class="mb-4">Copyright © 2014-2019 - All Rights Reserved</p></div>
+      <div class="col-12 col-md-4 col-lg-2 ml-auto text-md-right">
+        <div class="dropdown"> </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- / footer -->
+
+
+<script src="assets/js/vendor.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
