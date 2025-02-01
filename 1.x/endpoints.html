@@ -112,6 +112,9 @@
                     <div>
                       <ul class="nav flex-column">
                         <li class="nav-item">
+                          <a class="nav-link" href="endpoints.html#section-0">create public endpoint</a>
+                        </li>
+                        <li class="nav-item">
                           <a class="nav-link" href="endpoints.html#section-a">/authenticate</a>
                         </li>
                         <li class="nav-item">
@@ -311,6 +314,49 @@
 
 
             <!-- file tree -->
+            <section id="section-0">
+              <h2 class="section-title-0">Create Public Endpoint<a data-scroll href="#section-0" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
+              <p>Endpoints in BeAPI are secure by default making most of them PRIVATE. To add a public endpoint of your own, you need to follow these instructions:</p>
+              <ul>
+                <li><b>Add  Your @RestController</b>:  create your controller as a @RestController and use @requestmapping on your methods/endpoints:
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <div class="card-body" style="background-color:#000;">
+                          <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-java">@RestController
+public class GreetingController {
+
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	public ResponseEntity<?> greeting(@RequestParam("name")String name) {
+		...
+	}
+
+}</code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div></br>
+                </li>
+                <li><b>Add  Endpoints to Config</b>:  Finally, for your endpoints to be seen, you have to add them to <b>beapi-api.yml</b> under 'reserveduris':
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <div class="card-body" style="background-color:#000;">
+                          <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-java">api:
+    attempts: 5
+    procCores: 8
+    reserveduris: ['/authenticate','/register','/error','/logout','/validate','/validateResetPassword','/resetPassword','/forgotPassword','/hello']
+                          </code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <hr size="5">
+
             <section id="section-a">
               <h2 class="section-title-2">/authenticate<a data-scroll href="#section-a" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
               <p>The <b>/authenticate</b> endpoint is where you login with you username/password credentials</p>
@@ -477,6 +523,9 @@
           <aside class="col-md-3 col-xxl-3 d-none d-md-block">
             <div class="sticky">
               <ul id="toc" class="nav flex-column toc">
+                <li class="nav-item">
+                  <a data-scroll class="nav-link" href="#section-0">create public endpoint</a>
+                </li>
                 <li class="nav-item">
                   <a data-scroll class="nav-link" href="#section-a">/authenticate</a>
                 </li>
