@@ -112,6 +112,9 @@
                     <div>
                       <ul class="nav flex-column">
                         <li class="nav-item">
+                          <a class="nav-link" href="endpoints.html#section-0">create public endpoint</a>
+                        </li>
+                        <li class="nav-item">
                           <a class="nav-link" href="endpoints.html#section-a">/authenticate</a>
                         </li>
                         <li class="nav-item">
@@ -129,6 +132,9 @@
                   <div class="collapse show" id="menu-12" data-parent="#page-nav">
                     <div>
                       <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="priv_endpoints.html#section-4.0">create endpoint</a>
+                        </li>
                         <li class="nav-item">
                           <a class="nav-link" href="priv_endpoints.html#section-4.1">apidocs</a>
                         </li>
@@ -310,6 +316,45 @@
 <hr size="5">
 
             <!-- typogrpahy -->
+            <section id="section-4.0">
+              <h2 class="section-title-0">Create Endpoint<a data-scroll href="#section-4.0" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
+              <p>Endpoints in BeAPI are secure by default making most of them PRIVATE. To add an endpoint of your own, you need to follow these instructions:</p>
+              <ul>
+                <li><b>Add  Your @Controller</b>:  create your controller as a @Controller:
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <div class="card-body" style="background-color:#000;">
+                          <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-java">@Controller("company")
+public class CompanyController extends BeapiRequestHandler{
+
+	@Autowired
+	private CompanyService compService;
+
+	public Company show(HttpServletRequest request, HttpServletResponse response){
+		...
+	}</code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div></br>
+                </li>
+                <li><b>Create/scaffold IO State file</b>: You must then create an IO State file which contains all the rules for the endpoint. If you don't want to do this by hand, you can 'scaffold' it using the CLI tool:
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <div class="card-body" style="background-color:#000;">
+                          <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-java">gradle  scaffold -Pargs="connector=&ltdomain.package.name&gt"</code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <hr size="5">
+
             <section id="section-4">
               <h2 class="section-title-4">Provided Endpoints<a data-scroll href="#section-4" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
               <p>The Beapi Starter provides endpoints that are not visible in your project but can be called via API endpoints. These are also secured via IO State files (like all your other endpoints) but generally don't have to be changed. Below we go over each one of these and the endpoints provided...</p>
