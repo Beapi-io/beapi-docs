@@ -80,6 +80,9 @@
                           <a class="nav-link" href="config.html#section-2">Gradle.properties</a>
                         </li>
                         <li class="nav-item">
+                          <a class="nav-link" href="config.html#section-0">MailServer Setup</a>
+                        </li>
+                        <li class="nav-item">
                           <a class="nav-link" href="config.html#section-3">Beapi API Config Changes</a>
                         </li>
                         <li class="nav-item">
@@ -161,7 +164,7 @@
                           <a class="nav-link" href="auth.html#section-1">Authorization/Authentication</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="auth.html#section-2">MailServer Setup</a>
+                          <a class="nav-link" href="auth.html#section-2">Refresh Token</a>
                         </li>
                       </ul>
                     </div>
@@ -345,9 +348,9 @@
                       <div class="col">
                         <div class="alert alert-warning" role="alert">
                           <ul>
-                            <li><b>application.components</b> This should be the base path for ALL components in your application</li>
-                            <li><b>application.repository</b> This is the base path for your repositories</li>
-                            <li><b>application.domain</b> This is the base path for your domain objects</li>
+                            <li><b>application.components</b> This should be the base path for ALL components in your application (ex demo.application.*)</li>
+                            <li><b>application.repository</b> This is the base path for your repositories (ex demo.application.repositories)</li>
+                            <li><b>application.domain</b> This is the base path for your domain objects (ex demo.application.domain)</li>
                           </ul>
                         </div>
                       </div>
@@ -396,6 +399,49 @@
               </div>
             </section>
             <!-- / typography -->
+
+
+            <!-- file tree -->
+            <section id="section-0">
+              <h2 class="section-title-2">Mail Server Setup<a data-scroll href="#section-0" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
+              <p>Two-factor auth is used for 'registration/'forgot password' functionality. For this, you need to create an acct at <a href="https://www.twilio.com/docs/verify/email#twilio-docs-content-area">'twilio'/'sendgrid'</a></p>
+              <div class="row">
+                <div class="col">
+                  <div class="alert alert-warning" role="alert">
+                    <ul>
+                      <li>[SendGrid] Create or log in to <a href="https://www.twilio.com/docs/verify/email#set-up-your-sendgrid-account">your SendGrid account</a></li>
+                      <li>[SendGrid] Create a <a href="https://www.twilio.com/docs/verify/email#create-a-sendgrid-api-key">SendGrid API Key</a></li>
+                      <li>[SendGrid] Set up <a href="https://www.twilio.com/docs/verify/email#set-up-domain-authentication">domain authentication</a></li>
+                      <li>[SendGrid] Create <a href="https://www.twilio.com/docs/verify/email#create-an-email-template">an email template</a></li>
+                      <li>[Verify] Create a <a href="https://console.twilio.com/us1/develop/verify/services">Verify service</a></li>
+                      <li>[BEAPI] Change mail server config (see below)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div></br>
+
+              <p>The following variables in the <b>beapi_api.yml</b> file, need to be changed to match your mail server setup...</p>
+              <div class="row">
+                <div class="col">
+                  <div class="card">
+                    <div class="card-body" style="background-color:#000;">
+                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">...
+    mail:
+        host: 'smtp.sendgrid.net'
+        port: 587
+        username: 'apikey'
+        password: "password"
+        fromAddress: 'donotrespond@yoursite.com'
+        senderName: 'beapi.io'
+        smtpAuth: true
+        smtpStarttlsEnable: true
+        testemail: 'youremail@gmail.com'
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
 
             <!-- file tree -->
@@ -585,6 +631,9 @@
                 </li>
                 <li class="nav-item">
                   <a data-scroll class="nav-link" href="#section-2">Gradle.properties</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#section-0">MailServer Setup</a>
                 </li>
                 <li class="nav-item">
                   <a data-scroll class="nav-link" href="#section-3">beapi_api.yml</a>
