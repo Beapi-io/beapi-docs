@@ -433,44 +433,17 @@
 
             <!-- file tree -->
             <section id="section-2">
-              <h2 class="section-title-2">Mail Server Setup<a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
-              <p>Two-factor auth is used for 'registration/'forgot password' functionality. For this, you need to create an acct at <a href="https://www.twilio.com/docs/verify/email#twilio-docs-content-area">'twilio'/'sendgrid'</a></p>
-              <div class="row">
-                <div class="col">
-                  <div class="alert alert-warning" role="alert">
-                    <ul>
-                      <li>[SendGrid] Create or log in to <a href="https://www.twilio.com/docs/verify/email#set-up-your-sendgrid-account">your SendGrid account</a></li>
-                      <li>[SendGrid] Create a <a href="https://www.twilio.com/docs/verify/email#create-a-sendgrid-api-key">SendGrid API Key</a></li>
-                      <li>[SendGrid] Set up <a href="https://www.twilio.com/docs/verify/email#set-up-domain-authentication">domain authentication</a></li>
-                      <li>[SendGrid] Create <a href="https://www.twilio.com/docs/verify/email#create-an-email-template">an email template</a></li>
-                      <li>[Verify] Create a <a href="https://console.twilio.com/us1/develop/verify/services">Verify service</a></li>
-                      <li>[BEAPI] Change mail server config (see below)</li>
-                    </ul>
-                  </div>
-                </div>
-              </div></br>
-
-              <p>The following variables in the <b>beapi_api.yml</b> file, need to be changed to match your mail server setup...</p>
-              <div class="row">
-                <div class="col">
-                  <div class="card">
-                    <div class="card-body" style="background-color:#000;">
-                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">...
-    mail:
-        host: 'smtp.sendgrid.net'
-        port: 587
-        username: 'apikey'
-        password: "password"
-        fromAddress: 'donotrespond@yoursite.com'
-        senderName: 'beapi.io'
-        smtpAuth: true
-        smtpStarttlsEnable: true
-        testemail: 'youremail@gmail.com'
-</code></pre>
+              <h2 class="section-title-2">Refresh Token<a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
+              <p>Tokens expire every 24 hrs so to keep from having to send your credentials again, you use the <b>'/refreshToken'</b> endpoint. When calling the endpoint, you have to send your existing token and your username:</p>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body" style="background-color:#000;">
+                                <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">curl -v -b ./cookies.txt -H "Content-Type: application/json" -H "Authorization: Bearer eyJvcmlnaW4iOiIxMjcuMC4wLjEiLCJicm93c2VyIjoiVW5rbm93biIsIm9zIjoiVW5rbm93biIsImFsZyI6IkhTNTEyIn0.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTczODQ0NDcyMywiaWF0IjoxNzM4MzU4MzIzfQ" --request GET "http://localhost:8080/refreshToken?name=admin"</code></pre>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </section>
 
 
