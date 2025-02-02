@@ -126,6 +126,9 @@
                         <li class="nav-item">
                           <a class="nav-link" href="endpoints.html#section-4">/forgotPassword</a>
                         </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="endpoints.html#section-5">/refreshToken</a>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -522,7 +525,45 @@ public class GreetingController {
               </table>
             </section>
 
+            <hr size="5">
 
+            <section id="section-5">
+              <h2 class="section-title-5">/refreshToken<a data-scroll href="#section-5" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"></a></h2>
+              <p><b>/refreshToken</b> is a way to refresh the expiry on your token without resending credentials</p>
+              <div class="row">
+                <div class="col">
+                  <div class="card">
+                    <div class="card-body" style="background-color:#000;">
+                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">curl -v -b ./cookies.txt -H "Content-Type: application/json" -H "Authorization: Bearer eyJvcmlnaW4iOiIxMjcuMC4wLjEiLCJicm93c2VyIjoiVW5rbm93biIsIm9zIjoiVW5rbm93biIsImFsZyI6IkhTNTEyIn0.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTczODQ0NDcyMywiaWF0IjoxNzM4MzU4MzIzf" --request GET "http://localhost:8080/refreshToken?name=admin"</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p><b>Output:</b></p>
+              <div class="row">
+                <div class="col">
+                  <div class="alert alert-warning" role="alert">
+                    <p>token : ff8o6g8o2d8o9781o97rgfh7980127g2y0rt07y923132f213tfg2</p>
+                  </div>
+                </div>
+              </div>
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Param Name</b></th>
+                  <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Type</b></th>
+                  <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Description</b></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td style="padding:10px;">name</td>
+                  <td style="padding:10px;">String</td>
+                  <td style="padding:10px;">your username</td>
+                </tr>
+                </tbody>
+              </table>
+            </section>
           </article>
 
 
@@ -540,6 +581,9 @@ public class GreetingController {
                 </li>
                 <li class="nav-item">
                   <a data-scroll class="nav-link" href="#section-4">/forgotPassword</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#section-5">/refreshToken</a>
                 </li>
               </ul>
             </div>
