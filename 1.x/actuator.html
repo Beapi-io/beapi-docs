@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="assets/css/vendor.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <title>BeAPI API Framework - Documentation / Bootstrap</title>
+  <title>BeAPI API Framework - Documentation / Public Endpoints</title>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -65,6 +65,7 @@
                     </div>
                   </div>
                 </li>
+
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="collapse" href="#menu-3" role="button" aria-expanded="false" aria-controls="menu-3">Configuration</a>
                   <div class="collapse" id="menu-3" data-parent="#page-nav">
@@ -92,9 +93,10 @@
                     </div>
                   </div>
                 </li>
+
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="collapse" href="#menu-5" role="button" aria-expanded="false" aria-controls="menu-5">Bootstrapping</a>
-                  <div class="collapse show" id="menu-5" data-parent="#page-nav">
+                  <a class="nav-link" data-toggle="collapse" href="#menu-5" role="button" aria-expanded="false" aria-controls="menu-5">Bootstrapping</a>
+                  <div class="collapse" id="menu-5" data-parent="#page-nav">
                     <div>
                       <ul class="nav flex-column">
                         <li class="nav-item">
@@ -109,7 +111,7 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="collapse" href="#menu-11" role="button" aria-expanded="false" aria-controls="menu-11">Public Endpoints</a>
-                  <div class="collapse" id="menu-11" data-parent="#page-nav">
+                  <div class="collapse show" id="menu-11" data-parent="#page-nav">
                     <div>
                       <ul class="nav flex-column">
                         <li class="nav-item">
@@ -158,8 +160,9 @@
                     </div>
                   </div>
                 </li>
+
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="collapse" href="#menu-13" role="button" aria-expanded="false" aria-controls="menu-12">Actuator Endpoints</a>
+                  <a class="nav-link active" data-toggle="collapse" href="#menu-13" role="button" aria-expanded="true" aria-controls="menu-12">Actuator Endpoints</a>
                   <div class="collapse" id="menu-13" data-parent="#page-nav">
                     <div>
                       <ul class="nav flex-column">
@@ -197,6 +200,7 @@
                     </div>
                   </div>
                 </li>
+
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="collapse" href="#menu-10" role="button" aria-expanded="false" aria-controls="menu-10">Authorization/Authentication</a>
                   <div class="collapse" id="menu-10" data-parent="#page-nav">
@@ -212,6 +216,7 @@
                     </div>
                   </div>
                 </li>
+
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="collapse" href="#menu-4" role="button" aria-expanded="false" aria-controls="menu-4">Development</a>
                   <div class="collapse" id="menu-4" data-parent="#page-nav">
@@ -331,8 +336,8 @@
                 <div class="col">
                   <nav aria-label="breadcrumb" class="align-items-center">
                     <ol class="breadcrumb d-none d-lg-inline-flex">
-                      <li class="breadcrumb-item"><a href="index.html">Documentation</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Bootstrap</li>
+                      <li class="breadcrumb-item"><a href="index.html">Actuator</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">endpoints</li>
                     </ol>
                   </nav>
                 </div>
@@ -347,48 +352,226 @@
         <div class="row justify-content-between doc-content-body">
           <article class="col-md-9 col-xxl-8">
 
-            <h1 class="h2 font-weight-light"><b>Bootstrapping Your Application</b></h1>
-            <p>This functionality will be being implemented in version 0.6.0. See the <a href="https://github.com/orubel/spring-boot-starter-beapi#06-public-release-release-feb2023">project milestones</a> for more</p>
+            <h1 class="h2 font-weight-light"><b>Actuator Endpoints</b></h1>
+            <p>The <b>BeAPI Framework</b> provides private endpoints for checking stats and properties of the running service.. Below is a list of those endpoints and what each one does
 
-<hr size="5">
-
-            <section id="section-1">
-              <h2 class="section-title-2">Generate IO State<a data-scroll href="#section-1" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
-            <p>After you have built your domains, you can then 'autogenerate' your IO State files using the following command from the root of your project:</p>
-              <div class="row">
-                <div class="col">
-                  <div class="card">
-                    <div class="card-body" style="background-color:#000;">
-                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">gradle scaffold -Pargs="connector=demo.application.domain.Test"</code></pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p>This will then create all the necessary state files for your endpoints used by the framework.</p>
-
-
-            </section>
 
 
 <hr size="5">
 
-
-            <section id="section-2">
-              <h2 class="section-title-2">Generate Controller<a data-scroll href="#section-2" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
-              <p>Once you have your projects domains &  IOI State built, you can then 'autogenerate' your controllers using the following command from the root of the project:</p>
-              <div class="row">
-                <div class="col">
-                  <div class="card">
-                    <div class="card-body" style="background-color:#000;">
-                      <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-sh">gradle scaffold -Pargs="controller=demo.application.domain.Test, demo.application.service.TestService, java"</code></pre>
-                    </div>
-                  </div>
-                </div>
+            <section id="section-4">
+              <h2 class="section-title-4">Provided Endpoints<a data-scroll href="#section-4" class="anchor" data-toggle="tooltip" data-placement="top" title="Copy URL"><i class="icon-hash"></i></a></h2>
+              <p>The Beapi Starter provides endpoints that are not visible in your project but can be called via API endpoints. These are also secured via IO State files (like all your other endpoints) but generally don't have to be changed. Below we go over each one of these and the endpoints provided...</p>
+              <div id="section-4.0">
+                <h2 class="section-title-2"><b>env</b></h2>
+                <p>View the environment variables used by your application</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/env</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(List) attempts,procCores,documentationUrl,reservedUris,apichainLimit,chainingEnabled,batchingEnabled,encoding,iostateDir,staticEndpoint,serverType,supportedFormats,throttle,webhook,security</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div></br>
-              <p>This will then create all the necessary 'controllers' for your domain/service.</p>
 
+              <div id="section-4.1">
+                <h2 class="section-title-2"><b>getProperties</b></h2>
+                <p style="margin-bottom: 0;">View the properties variables used by your application</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/getProperties</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(List) attempts,procCores,documentationUrl,reservedUris,apichainLimit,chainingEnabled,batchingEnabled,encoding,iostateDir,staticEndpoint,serverType,supportedFormats,throttle,webhook,security</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
+
+              <div id="section-4.2">
+                <h2 class="section-title-2"><b>health</b></h2>
+                <p style="margin-bottom: 0;">Shows  the overall health of your application and its dependencies</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/health</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(List) application,build</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
+
+              <div id="section-4.3">
+                <h2 class="section-title-2"><b>caches</b></h2>
+                <p style="margin-bottom: 0;">Displays a complete list of all caches in your application.</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/caches</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(Object) caches</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
+
+              <div id="section-4.4">
+                <h2 class="section-title-2"><b>beans</b></h2>
+                <p style="margin-bottom: 0;">Displays a complete list of all Spring beans in your application.</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/beans</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(Object) beans</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
+
+              <div id="section-4.5">
+                <h2 class="section-title-2"><b>logging</b></h2>
+                <p style="margin-bottom: 0;">View and manage application logs</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/logging</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(Object) logging</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
+
+              <div id="section-4.6">
+                <h2 class="section-title-2"><b>db</b></h2>
+                <p style="margin-bottom: 0;">Displays a complete list of all database info for your application.</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/db</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(Object) db</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
+
+              <div id="section-4.7">
+                <h2 class="section-title-2"><b>sessions</b></h2>
+                <p style="margin-bottom: 0;">Displays a complete list of all session data for your application.</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/sessions</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(Object) sessions</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
+
+              <div id="section-4.8">
+                <h2 class="section-title-2"><b>metrics</b></h2>
+                <p style="margin-bottom: 0;">Shows gathered metrics about your application's performance, such as memory usage and CPU usage</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/metrics</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(Object) metrics</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
+
+              <div id="section-4.9">
+                <h2 class="section-title-2"><b>stats</b></h2>
+                <p style="margin-bottom: 0;">Shows gathered metrics about your application's performance such as request statistics</p>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col" style="padding:10px;width:20%;color:#000;"><b>Endpoint</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Request Params</b></th>
+                    <th scope="col" style="padding:10px;width:40%;color:#000;"><b>Response Params</b></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td style="padding:10px;">/{version}/actuator/stats</td>
+                    <td style="padding:10px;"></td>
+                    <td style="padding:10px;">(Object) stats</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div></br>
             </section>
-
 
 
           </article>
@@ -398,13 +581,19 @@
             <div class="sticky">
               <ul id="toc" class="nav flex-column toc">
                 <li class="nav-item">
-                  <a data-scroll class="nav-link" href="#section-1">Generate API Controllers</a>
+                  <a data-scroll class="nav-link" href="#section-0">create public endpoint</a>
                 </li>
                 <li class="nav-item">
-                  <a data-scroll class="nav-link" href="#section-2">Generate IO State</a>
+                  <a data-scroll class="nav-link" href="#section-a">/authenticate</a>
                 </li>
                 <li class="nav-item">
-                  <a data-scroll class="nav-link" href="#section-3">Troubleshooting</a>
+                  <a data-scroll class="nav-link" href="#section-1">/register & /validate</a>
+                </li>
+                <li class="nav-item">
+                  <a data-scroll class="nav-link" href="#section-4">/forgotPassword</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#section-5">/refreshToken</a>
                 </li>
               </ul>
             </div>
@@ -429,8 +618,7 @@
         <a href=""><img src="assets/images/logo_bw.png" alt="Logo"></a>
       </div>
       <div class="col-12 col-md-6 text-white">
-        <p class="mb-4">Copyright © 2014-2019 - All Rights Reserved</p>
-      </div>
+        <p class="mb-4">Copyright © 2014-2019 - All Rights Reserved</p></div>
       <div class="col-12 col-md-4 col-lg-2 ml-auto text-md-right">
         <div class="dropdown"> </div>
       </div>
