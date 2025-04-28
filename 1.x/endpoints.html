@@ -372,8 +372,8 @@
 public class GreetingController {
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public ResponseEntity<?> greeting(@RequestParam("name")String name) {
-		...
+	public ResponseEntity<?> hello(HttpServletRequest request, HttpServletResponse response, @RequestParam("name") String name) {
+		return ResponseEntity.ok("hello called "+name);
 	}
 
 }</code></pre>
