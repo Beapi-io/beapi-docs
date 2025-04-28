@@ -372,7 +372,7 @@
 public class GreetingController {
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public ResponseEntity&lt;&quest;&gt; hello(HttpServletRequest request, HttpServletResponse response, @RequestParam("name") String name) {
+	public ResponseEntity&lt;&quest;&gt; hello(@RequestParam("name") String name) {
 		return ResponseEntity.ok("hello called "+name);
 	}
 
@@ -390,7 +390,17 @@ public class GreetingController {
                           <pre style="background-color:#000;padding:0px;margin:0px;"><code class="language-java">api:
     attempts: 5
     procCores: 8
-    reserveduris: ['/authenticate','/register','/error','/logout','/validate','/validateResetPassword','/resetPassword','/forgotPassword','/hello']
+    reserveduris: [
+        '/authenticate',
+        '/register',
+        '/error',
+        '/logout',
+        '/validate',
+        '/validateResetPassword',
+        '/resetPassword',
+        '/forgotPassword',
+        '/hello'
+    ]
                           </code></pre>
                         </div>
                       </div>
